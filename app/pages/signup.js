@@ -5,7 +5,7 @@ import { Col, Input, Button } from "react-bootstrap";
 import AuthStore from "../stores/auth";
 
 export default class SignUp extends Component {
-  static displayName = "SignUp";
+  static displayName = "SignUpPage";
   static contextTypes = { router: PropTypes.func };
 
   constructor(props) {
