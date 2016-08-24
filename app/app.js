@@ -9,7 +9,7 @@ import Application from "./application";
 
 import IndexPage from "./pages/index";
 import NotFoundPage from "./pages/notfound";
-import NullPage from "./pages/null";
+import Pokemon from "./pages/pokemon";
 import SignInPage from "./pages/signin";
 import SignUpPage from "./pages/signup";
 import SignOut from "./pages/signout";
@@ -26,8 +26,8 @@ const routes = (
     </Route>
     <Route name="home" path="/" handler={Layout}>
       <DefaultRoute name="index" handler={IndexPage} />
-      <Route name="null-page" path="null" handler={NullPage} />
-      <Route name="profile" path="profile" handler={NullPage} />
+      <Route name="pokepage" path="pokepage" handler={Pokemon} />
+      <Route name="profile" path="profile" handler={Pokemon} />
       <NotFoundRoute handler={NotFoundPage} />
     </Route>
   </Route>
