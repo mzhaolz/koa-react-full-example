@@ -3,10 +3,19 @@ import request from "superagent";
 
 import { Col, Button, Badge, Form, Input } from "react-bootstrap";
 
-const get = (url, cb) => {
-  request.get(url)
+const post = (url, content, cb) => {
+  request.post(url)
+	.set("Accept", "application/json")
   .set("Content-Type", "application/json")
+	.send(content)
   .end(cb);
+};
+
+const log = (err, res) => {
+	if (err) {
+		console.log(err);
+		return;
+	}
 };
 
 export default class PokemonLocator extends React.Component {
@@ -19,41 +28,14 @@ export default class PokemonLocator extends React.Component {
     this.state = { count: props.initialCount };
   }
 
-  componentWillMount() {
-    get("/value", (err, res) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.setState({ count: res.body.count });
-    });
-  }
-
-  onClickInc = (event) => {
-    event.preventDefault();
-    get("/inc", (err, res) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.setState({ count: res.body.count });
-    });
-  }
-
-  onClickDec = (event) => {
-    event.preventDefault();
-    get("/dec", (err, res) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.setState({ count: res.body.count });
-    });
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
-    //TODO(mzhaolz): handle the submit
+
+		const pokemon = this.refs.pokemon.getValue();
+		const userloc = this.refs.userloc.getValue();
+		const radius = this.refs.radius.getValue();
+
+		post("/pokepage", { pokemon: pokemon, userloc: userloc, radius: radius}, log);
   }
 
   render() {

@@ -4,6 +4,7 @@ var Router = require("koa-router");
 var countController = require("../src/controllers/count");
 var indexController = require("../src/controllers/index");
 var authController = require("../src/controllers/auth");
+var locateController = require("../src/controllers/locate");
 
 var secured = function *(next) {
   if (this.isAuthenticated()) {
@@ -32,6 +33,9 @@ module.exports = function(app, passport) {
 
   router.all("/signout", authController.signOut);
   router.post("/signup", authController.createUser);
+
+	//TODO(mzhaolz): Names are messsed up, fix after done experimenting.
+	router.post("/pokepage", locateController.sendLocationQuery);
 
   // secured routes
   router.get("/value", secured, countController.getCount);
